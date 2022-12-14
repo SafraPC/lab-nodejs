@@ -1,5 +1,5 @@
 import {Content} from './content';
-import {Notification} from './notification';
+import {Notification} from './index';
 
 describe('Notification', () => {
     it('Should be able to create a notification', () => {
