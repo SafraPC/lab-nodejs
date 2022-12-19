@@ -8,6 +8,7 @@ export interface NotificationProps {
     category: string;
     readAt?: Date | null;
     createdAt: Date;
+    canceledAt?: Date | null;
 }
 
 export class Notification {
@@ -20,8 +21,9 @@ export class Notification {
                 createdAt?: Date;
             }
         >,
+        id?: string,
     ) {
-        this._id = randomUUID();
+        this._id = id ?? randomUUID();
         this.props = {
             ...props,
             createdAt: props.createdAt ?? new Date(),
@@ -68,7 +70,19 @@ export class Notification {
         return this.props.createdAt;
     }
 
-    public set readAt(readAt: Date | null | undefined) {
-        this.props.readAt = readAt;
+    public read(): void {
+        this.props.readAt = new Date();
+    }
+
+    public unread(): void {
+        this.props.readAt = null;
+    }
+
+    public get canceledAt(): Date | null | undefined {
+        return this.props.canceledAt;
+    }
+
+    public cancel(): void {
+        this.props.canceledAt = new Date();
     }
 }
